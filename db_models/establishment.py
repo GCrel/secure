@@ -22,3 +22,5 @@ class Establishments (Base):
     def single_establishment(cls, est_id):
         queri = select([cls.est]).where(cls.est.c.cls_id == est_id)
         return queri
+
+    

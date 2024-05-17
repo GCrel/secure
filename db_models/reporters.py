@@ -23,3 +23,10 @@ class Reporters (Base):
         query = select([cls.rep]).where(cls.rep.c.rep_id == rep_id)
         return query
     
+    @classmethod
+    def reporter(cls, inc_id):
+        query = select([cls.rep]).select_from(
+        join(cls.rep, cls.emc, cls.rep.c.rep_id == cls.emc.c.rep_id)
+        .join(cls.emc, cls.emergency_reports.c.emc_id == cls.emc.c.emc_id)
+        ).where(cls.emc.c.inc_id == inc_id)
+        return query

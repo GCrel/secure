@@ -10,6 +10,7 @@ class Incidents (Base):
     engine = create_engine(BBDD_CONNECTION)
     metadata = MetaData()
     inc = Table("incidents", metadata, schema='seguridad')
+    
     id_not_in_db = Column(Integer, primary_key=True) # Tabla con primary key
     print("finished config for Establishment")
 
@@ -22,3 +23,5 @@ class Incidents (Base):
     def single_incident(cls, inc_id):
         queri = select([cls.inc]).where(cls.inc.c.inc_id == inc_id)
         return queri
+    
+    
