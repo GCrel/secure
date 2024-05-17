@@ -9,16 +9,16 @@ class Establishments (Base):
     print("entering Establishment config")
     engine = create_engine(BBDD_CONNECTION)
     metadata = MetaData()
-    est = Table("establishment", metadata, autoload=True, autoload_with=engine, schema='seguridad')
+    est = Table("establishment", metadata, schema='seguridad')
     id_not_in_db = Column(Integer, primary_key=True) # Tabla con primary key
     print("finished config for Establishment")
 
     @classmethod
-    def all_establishments(est):
-        queri = select([est.est])
+    def all_establishments(cls):
+        queri = select([cls.est])
         return queri
     
     @classmethod
-    def single_establishment(est, est_id):
-        queri = select([est.est]).where(est.est.c.cls_id == est_id)
+    def single_establishment(cls, est_id):
+        queri = select([cls.est]).where(cls.est.c.cls_id == est_id)
         return queri

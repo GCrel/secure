@@ -10,6 +10,7 @@ class EmergencyCalls(Base):
     engine = create_engine(BBDD_CONNECTION)
     metadata = MetaData()
     emc = Table("emergency_calls", metadata, autoload=True, autoload_with=engine, schema='seguridad')
+    print("lega el emc")
     id_not_in_db = Column(Integer, primary_key=True) # Tabla con primary key
     print("finished config for Emergency Calls")
 

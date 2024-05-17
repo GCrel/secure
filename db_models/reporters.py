@@ -9,16 +9,17 @@ class Reporters (Base):
     print("entering Establishment config")
     engine = create_engine(BBDD_CONNECTION)
     metadata = MetaData()
-    rep = Table("reporters", metadata, autoload=True, autoload_with=engine, schema='seguridad')
+    rep = Table("reporters", metadata, schema='seguridad', autoload=True, autoload_with=engine)
     id_not_in_db = Column(Integer, primary_key=True) # Tabla con primary key
     print("finished config for Establishment")
 
     @classmethod
-    def all_reporters(rep):
-        queri = select([rep.est])
-        return queri
+    def all_reporters(cls):
+        query = select([cls.rep])
+        return query
     
     @classmethod
-    def single_reporter(rep, rep_id):
-        queri = select([rep.est]).where(rep.est.c.rep_id == rep_id)
-        return queri
+    def single_reporter(cls, rep_id):
+        query = select([cls.rep]).where(cls.rep.c.rep_id == rep_id)
+        return query
+    
