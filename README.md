@@ -1,4 +1,4 @@
-# Gestion De llamadas de emergencia Policiales
+# Gestion De llamadas de emergencia Policial
 Data Access Objects for health care
 
 #### Before you begin, you’ll need:
