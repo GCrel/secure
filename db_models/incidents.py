@@ -9,8 +9,8 @@ class Incidents (Base):
     print("entering Establishment config")
     engine = create_engine(BBDD_CONNECTION)
     metadata = MetaData()
-    inc = Table("incidents", metadata, schema='seguridad')
-    
+    inc = Table("incidents", metadata, autoload=True, autoload_with=engine, schema='seguridad')
+
     id_not_in_db = Column(Integer, primary_key=True) # Tabla con primary key
     print("finished config for Establishment")
 

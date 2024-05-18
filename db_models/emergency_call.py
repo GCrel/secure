@@ -17,6 +17,7 @@ class EmergencyCalls(Base):
 
     emc_est = Table("emerg_establis", metadata, autoload=True, autoload_with=engine, schema='seguridad')
     est = Establishments.est
+
     @classmethod
     def all_calls(cls):
         queri = select([cls.emc])
@@ -36,8 +37,11 @@ class EmergencyCalls(Base):
     def call_by_establishment(cls, est_id):
         query = (
             select([cls.emc,cls.est.c.est_id])
-            .join(cls.emc, cls.emc_est, cls.emc_est.c.emc_id == cls.emc.c.inc_id)
-            .join(cls.est, cls.emc_est, cls.est.c.est_id == cls.emc_est.c.est_id)
-            .where(cls.est.c.est_id == est_id)
+            .select_from(
+                cls.emc
+                .join(cls.emc_est, cls.emc.c.emc_id == cls.emc_est.c.emc_id)
+                .join(cls.est, cls.emc_est.c.est_id == cls.est.c.est_id)
             )
+        .where(cls.est.c.est_id == est_id)
+    )
         return query
