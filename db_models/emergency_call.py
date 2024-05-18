@@ -1,6 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, select, join, MetaData, Table, Column, Integer
 from config_vars import BBDD_CONNECTION
+from sqlalchemy import func, desc
+
 
 from establishment import Establishments
 
@@ -45,3 +47,17 @@ class EmergencyCalls(Base):
         .where(cls.est.c.est_id == est_id)
     )
         return query
+        
+    @classmethod
+    def most_frequent_accident(cls):
+        query = (
+            select([cls.emc.c.emc_details, func.count().label('count')])
+            .group_by(cls.emc.c.emc_details)
+            .order_by(desc('count'))
+        )
+        
+        result = cls.engine.execute(query)
+        most_common = result.first()
+
+        result.close()
+        return most_common[0] if most_common else None

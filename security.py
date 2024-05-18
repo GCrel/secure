@@ -52,3 +52,6 @@ class Security:
         else:
             query = Establishments.all_establishments()
         return self.connection.execute(query).fetchall()
+    def getMaxFrecuenceIncidents(self):
+        return EmergencyCalls.most_frequent_accident()
+
