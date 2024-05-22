@@ -30,3 +30,7 @@ class Reporters (Base):
         .join(cls.emc, cls.emergency_reports.c.emc_id == cls.emc.c.emc_id)
         ).where(cls.emc.c.inc_id == inc_id)
         return query
+    @classmethod
+    def by_lastname(cls, lastname):
+        query = select([cls.rep]).where(cls.rep.c.rep_last_name == lastname)
+        return query
