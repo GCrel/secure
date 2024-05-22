@@ -1,4 +1,3 @@
-#from sqlalchemy import create_engine, select, join, MetaData, Table
 import sys
 import os
 dirname = os.path.dirname(__file__)
@@ -6,7 +5,6 @@ dirname = os.path.dirname(__file__)
 sys.path.append(dirname)
 sys.path.append(dirname+"/db_models/")
 
-from sqlalchemy import create_engine, select, join, MetaData, Table
 from sqlalchemy import create_engine, select, join, MetaData, Table
 from db_models.emergency_call import EmergencyCalls
 from db_models.establishment import Establishments
